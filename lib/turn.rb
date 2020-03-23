@@ -24,15 +24,23 @@ class Turn
 
   def winner
     if type == :basic
-      @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
-      @player1
-    elsif
-      @player2
-    end
+      if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
+          @player1
+      else
+          @player2
+      end
 
-    #if turn type is basic and if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
-    #player1
-    #else player2
+    elsif type == :war
+        if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
+          @player1
+        else
+          @player2
+        end
+
+      else
+        "No Winner"
+      end
+    end
   end
 
   def pile_cards
@@ -46,10 +54,8 @@ class Turn
     if type == :basic
       @spoils_of_war.map do |card|
         winner.deck.cards << card
-    #player gets two cards added to spoils of war added to their array
-    #winner.deck.cards << @spoils_of_war
+  
       @spoils_of_war = []
       end
     end
   end
-end
